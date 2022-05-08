@@ -1,0 +1,10 @@
+#!/bin/bash
+if g++ -g3 -Wall -fmodules-ts -fprofile-arcs -ftest-coverage -std=c++2b card.cpp testcard.cpp main.cpp -o card; then
+    rm -rf *.gcda *.gcov
+    ./card
+    gcov card-card.cpp
+    cat card.cpp.gcov | grep '####'  | grep -v unreachable
+else
+    echo build failed
+fi
+
